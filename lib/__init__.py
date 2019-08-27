@@ -125,14 +125,13 @@ def ransac_sphere_arc(points, inlier_angle_rad_threshold, iterations=1000):
     best_num_inliers = -1
     best_pt1 = None
     best_pt2 = None
+    
+    # FIXME: too slow, need to vectorize
     for i in range(iterations):
         print("Iteration " + str(i))
         rand_indices = np.random.choice(len(points), size=2, replace=False)
         pt1 = points[rand_indices[0]]
         pt2 = points[rand_indices[1]]
-
-        best_pt1 = pt1
-        best_pt2 = pt2
 
         num_inliers = 0
         for j in range(len(points)):
